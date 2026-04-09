@@ -10,330 +10,64 @@
   <link rel="manifest" href="manifest.json" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --green: #4CAF50;
-      --green-dark: #388E3C;
-      --red: #E53935;
-      --red-dark: #B71C1C;
-      --bg: #f8f7f4;
-      --surface: #ffffff;
-      --surface2: #f1f0ec;
-      --border: #e0ddd6;
-      --text: #1a1a1a;
-      --text2: #666660;
-      --text3: #999992;
-      --amber-bg: #FAEEDA;
-      --amber-text: #854F0B;
-      --radius: 12px;
-      --radius-sm: 8px;
+      --green: #4CAF50; --green-dark: #388E3C;
+      --red: #E53935; --red-dark: #B71C1C;
+      --bg: #f8f7f4; --surface: #ffffff; --surface2: #f1f0ec;
+      --border: #e0ddd6; --text: #1a1a1a; --text2: #666660; --text3: #999992;
+      --amber-bg: #FAEEDA; --amber-text: #854F0B;
+      --radius: 12px; --radius-sm: 8px;
     }
-
-    html, body {
-      height: 100%;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .app {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 1.25rem 1rem 5rem;
-      min-height: 100%;
-    }
-
-    /* Header */
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 1.5rem;
-    }
-    .header h1 {
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: -0.3px;
-    }
-    .header .count {
-      font-size: 12px;
-      color: var(--text3);
-    }
-
-    /* Add row */
-    .add-row {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 1.25rem;
-    }
-    .add-row input[type="text"] {
-      flex: 1 1 0%;
-      width: 0;
-      min-width: 0;
-      font-size: 16px;
-      padding: 11px 14px;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-sm);
-      background: var(--surface);
-      color: var(--text);
-      outline: none;
-      transition: border-color 0.15s;
-    }
-    .add-row input[type="text"]:focus {
-      border-color: var(--green);
-    }
-    .add-row input[type="text"]::placeholder {
-      color: var(--text3);
-    }
-    .add-row select {
-      flex: 0 0 100px;
-      width: 100px;
-      font-size: 14px;
-      padding: 11px 8px;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-sm);
-      background: var(--surface);
-      color: var(--text);
-      cursor: pointer;
-      outline: none;
-      appearance: none;
-      -webkit-appearance: none;
-      text-align: center;
-    }
-    .btn-add {
-      flex: 0 0 44px;
-      width: 44px;
-      height: 44px;
-      border: none;
-      border-radius: 50%;
-      background: var(--green);
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.15s, transform 0.1s;
-      -webkit-tap-highlight-color: transparent;
-    }
+    html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+    .app { max-width: 600px; margin: 0 auto; padding: 1.25rem 1rem 5rem; min-height: 100%; }
+    .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+    .header h1 { font-size: 20px; font-weight: 600; letter-spacing: -0.3px; }
+    .header .count { font-size: 12px; color: var(--text3); }
+    .add-row { display: flex; gap: 8px; align-items: center; margin-bottom: 1.25rem; }
+    .add-row input[type="text"] { flex: 1 1 0%; width: 0; min-width: 0; font-size: 16px; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); outline: none; transition: border-color 0.15s; }
+    .add-row input[type="text"]:focus { border-color: var(--green); }
+    .add-row input[type="text"]::placeholder { color: var(--text3); }
+    .add-row select { flex: 0 0 100px; width: 100px; font-size: 14px; padding: 11px 8px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); cursor: pointer; outline: none; appearance: none; -webkit-appearance: none; text-align: center; }
+    .btn-add { flex: 0 0 44px; width: 44px; height: 44px; border: none; border-radius: 50%; background: var(--green); color: white; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s, transform 0.1s; -webkit-tap-highlight-color: transparent; }
     .btn-add:active { background: var(--green-dark); transform: scale(0.94); }
-
-    /* Columns */
-    .cols {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 1.25rem;
-    }
-    .col-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 0.875rem;
-      min-height: 130px;
-    }
-    .col-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text3);
-      margin-bottom: 10px;
-    }
-
-    /* Task item */
-    .task-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 10px;
-      background: var(--surface2);
-      border-radius: var(--radius-sm);
-      margin-bottom: 7px;
-      animation: fadeIn 0.15s ease;
-    }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
-
-    .task-label {
-      flex: 1;
-      font-size: 13px;
-      line-height: 1.4;
-      word-break: break-word;
-      min-width: 0;
-      color: var(--text);
-    }
-    .task-actions {
-      display: flex;
-      gap: 5px;
-      flex-shrink: 0;
-    }
-    .btn-ok, .btn-no {
-      width: 30px;
-      height: 30px;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 15px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.1s;
-      -webkit-tap-highlight-color: transparent;
-    }
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
+    .col-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.875rem; min-height: 130px; }
+    .col-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); margin-bottom: 10px; }
+    .task-item { display: flex; align-items: center; gap: 6px; padding: 8px 8px 8px 4px; background: var(--surface2); border-radius: var(--radius-sm); margin-bottom: 7px; touch-action: none; user-select: none; -webkit-user-select: none; transition: opacity 0.15s, box-shadow 0.15s; }
+    .task-item.dragging { opacity: 0.35; box-shadow: none; }
+    .task-item.drag-over { box-shadow: 0 -3px 0 var(--green); }
+    .drag-handle { flex-shrink: 0; color: var(--text3); font-size: 13px; padding: 0 4px; line-height: 1; cursor: grab; }
+    .task-label { flex: 1; font-size: 13px; line-height: 1.4; word-break: break-word; min-width: 0; color: var(--text); }
+    .task-actions { display: flex; gap: 5px; flex-shrink: 0; }
+    .btn-ok, .btn-no { width: 30px; height: 30px; border: none; border-radius: 50%; cursor: pointer; font-size: 15px; font-weight: 700; display: flex; align-items: center; justify-content: center; transition: transform 0.1s; -webkit-tap-highlight-color: transparent; }
     .btn-ok { background: var(--green); color: white; }
     .btn-ok:active { background: var(--green-dark); transform: scale(0.9); }
     .btn-no { background: var(--red); color: white; }
     .btn-no:active { background: var(--red-dark); transform: scale(0.9); }
-
-    .badge-ext {
-      font-size: 10px;
-      font-weight: 600;
-      background: var(--amber-bg);
-      color: var(--amber-text);
-      border-radius: 4px;
-      padding: 2px 5px;
-      flex-shrink: 0;
-    }
-    .empty {
-      font-size: 12px;
-      color: var(--text3);
-      text-align: center;
-      padding: 1.5rem 0;
-    }
-
-    /* Journal */
-    .journal-section {
-      margin-top: 0.5rem;
-    }
-    .journal-toggle {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      padding: 4px 0;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .journal-toggle span {
-      font-size: 12px;
-      color: var(--text3);
-    }
-    .journal-toggle .arrow {
-      font-size: 10px;
-      color: var(--text3);
-      transition: transform 0.2s;
-    }
+    .badge-ext { font-size: 10px; font-weight: 600; background: var(--amber-bg); color: var(--amber-text); border-radius: 4px; padding: 2px 5px; flex-shrink: 0; }
+    .empty { font-size: 12px; color: var(--text3); text-align: center; padding: 1.5rem 0; }
+    .journal-section { margin-top: 0.5rem; }
+    .journal-toggle { display: flex; align-items: center; gap: 6px; cursor: pointer; padding: 4px 0; user-select: none; -webkit-tap-highlight-color: transparent; }
+    .journal-toggle span { font-size: 12px; color: var(--text3); }
+    .journal-toggle .arrow { font-size: 10px; color: var(--text3); transition: transform 0.2s; }
     .journal-toggle.open .arrow { transform: rotate(90deg); }
     .journal-list { margin-top: 8px; display: none; }
     .journal-list.open { display: block; }
-    .log-item {
-      font-size: 12px;
-      padding: 7px 12px;
-      border-left: 2px solid var(--border);
-      margin: 5px 0;
-      line-height: 1.5;
-    }
+    .log-item { font-size: 12px; padding: 7px 12px; border-left: 2px solid var(--border); margin: 5px 0; line-height: 1.5; }
     .log-date { color: var(--text3); font-size: 11px; }
     .log-suite { color: var(--text); margin-top: 2px; }
-
-    /* Modal */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      z-index: 200;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s;
-    }
-    .modal-overlay.visible {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .modal {
-      background: var(--surface);
-      border-radius: 20px 20px 0 0;
-      padding: 1.5rem 1.25rem 2.5rem;
-      width: 100%;
-      max-width: 560px;
-      transform: translateY(100%);
-      transition: transform 0.25s cubic-bezier(0.32, 0.72, 0, 1);
-    }
-    .modal-overlay.visible .modal {
-      transform: translateY(0);
-    }
-    .modal-handle {
-      width: 36px;
-      height: 4px;
-      background: var(--border);
-      border-radius: 2px;
-      margin: 0 auto 1.25rem;
-    }
-    .modal h3 {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 14px;
-      color: var(--text);
-      line-height: 1.4;
-    }
-    .modal label {
-      display: block;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: var(--text3);
-      margin-bottom: 6px;
-    }
-    .modal textarea {
-      width: 100%;
-      font-size: 16px;
-      padding: 11px 14px;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-sm);
-      background: var(--surface2);
-      color: var(--text);
-      margin-bottom: 14px;
-      font-family: inherit;
-      resize: none;
-      height: 76px;
-      outline: none;
-    }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: flex-end; justify-content: center; z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    .modal-overlay.visible { opacity: 1; pointer-events: all; }
+    .modal { background: var(--surface); border-radius: 20px 20px 0 0; padding: 1.5rem 1.25rem 2.5rem; width: 100%; max-width: 560px; transform: translateY(100%); transition: transform 0.25s cubic-bezier(0.32, 0.72, 0, 1); }
+    .modal-overlay.visible .modal { transform: translateY(0); }
+    .modal-handle { width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 1.25rem; }
+    .modal h3 { font-size: 14px; font-weight: 600; margin-bottom: 14px; color: var(--text); line-height: 1.4; }
+    .modal label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text3); margin-bottom: 6px; }
+    .modal textarea { width: 100%; font-size: 16px; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); background: var(--surface2); color: var(--text); margin-bottom: 14px; font-family: inherit; resize: none; height: 76px; outline: none; }
     .modal textarea:focus { border-color: var(--green); }
-    .modal select {
-      width: 100%;
-      font-size: 15px;
-      padding: 11px 14px;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-sm);
-      background: var(--surface2);
-      color: var(--text);
-      margin-bottom: 18px;
-      outline: none;
-      appearance: none;
-      -webkit-appearance: none;
-    }
-    .modal-btns {
-      display: flex;
-      gap: 10px;
-    }
-    .modal-btns button {
-      flex: 1;
-      padding: 13px;
-      font-size: 15px;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      font-family: inherit;
-      font-weight: 500;
-      transition: transform 0.1s;
-      -webkit-tap-highlight-color: transparent;
-    }
+    .modal select { width: 100%; font-size: 15px; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); background: var(--surface2); color: var(--text); margin-bottom: 18px; outline: none; appearance: none; -webkit-appearance: none; }
+    .modal-btns { display: flex; gap: 10px; }
+    .modal-btns button { flex: 1; padding: 13px; font-size: 15px; border-radius: var(--radius-sm); cursor: pointer; font-family: inherit; font-weight: 500; transition: transform 0.1s; -webkit-tap-highlight-color: transparent; }
     .modal-btns button:active { transform: scale(0.97); }
     .btn-confirm { background: var(--green); color: white; border: none; }
     .btn-confirm:active { background: var(--green-dark); }
@@ -346,7 +80,6 @@
       <h1>Todo</h1>
       <span class="count" id="count"></span>
     </div>
-
     <div class="add-row">
       <input type="text" id="new-task" placeholder="Nouvelle tâche..." autocomplete="off" />
       <select id="new-type">
@@ -355,7 +88,6 @@
       </select>
       <button class="btn-add" onclick="addTask()" aria-label="Ajouter">&#10003;</button>
     </div>
-
     <div class="cols">
       <div class="col-card">
         <div class="col-label">Moi</div>
@@ -366,7 +98,6 @@
         <div id="col-ext"></div>
       </div>
     </div>
-
     <div class="journal-section">
       <div class="journal-toggle" id="journal-toggle" onclick="toggleJournal()">
         <span class="arrow">&#9658;</span>
@@ -377,7 +108,6 @@
     </div>
   </div>
 
-  <!-- Modal -->
   <div class="modal-overlay" id="modal-overlay">
     <div class="modal">
       <div class="modal-handle"></div>
@@ -399,18 +129,12 @@
 
   <script>
     const STORAGE_KEY = 'todo-olivier';
-    let tasks = [], log = [], nextId = 10, pendingTask = null;
-    let journalOpen = false;
+    let tasks = [], log = [], nextId = 10, pendingTask = null, journalOpen = false;
 
     function loadData() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        if (raw) {
-          const d = JSON.parse(raw);
-          tasks = d.tasks || [];
-          log = d.log || [];
-          nextId = d.nextId || 10;
-        }
+        if (raw) { const d = JSON.parse(raw); tasks = d.tasks || []; log = d.log || []; nextId = d.nextId || 10; }
       } catch(e) {}
       render();
     }
@@ -419,16 +143,18 @@
       try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ tasks, log, nextId })); } catch(e) {}
     }
 
+    function escHtml(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
     function render() {
       ['moi', 'ext'].forEach(col => {
         const el = document.getElementById('col-' + col);
         const items = tasks.filter(t => t.col === col);
-        if (!items.length) {
-          el.innerHTML = '<div class="empty">—</div>';
-          return;
-        }
+        if (!items.length) { el.innerHTML = '<div class="empty">—</div>'; return; }
         el.innerHTML = items.map(t => `
-          <div class="task-item" id="task-${t.id}">
+          <div class="task-item" data-id="${t.id}" data-col="${col}">
+            <span class="drag-handle">&#8801;</span>
             ${col === 'ext' ? '<span class="badge-ext">ext</span>' : ''}
             <span class="task-label">${escHtml(t.label)}</span>
             <span class="task-actions">
@@ -436,29 +162,108 @@
               <button class="btn-no" onclick="removeTask(${t.id})">&#10007;</button>
             </span>
           </div>`).join('');
+        setupDrag(el);
       });
 
       const total = tasks.length;
       document.getElementById('count').textContent = total ? total + ' tâche' + (total > 1 ? 's' : '') : '';
-
       const jCount = log.length;
       document.getElementById('journal-count').textContent = jCount ? '(' + jCount + ')' : '';
-
       const jl = document.getElementById('journal-list');
-      if (!log.length) {
-        jl.innerHTML = '<div class="empty">Aucune tâche terminée</div>';
-      } else {
-        jl.innerHTML = log.slice().reverse().map(l => `
-          <div class="log-item">
-            <div class="log-date">${l.date} — ${escHtml(l.label)}</div>
-            ${l.suite ? `<div class="log-suite">&#8618; ${escHtml(l.suite)}</div>` : ''}
-          </div>`).join('');
+      if (!log.length) { jl.innerHTML = '<div class="empty">Aucune tâche terminée</div>'; }
+      else { jl.innerHTML = log.slice().reverse().map(l => `<div class="log-item"><div class="log-date">${l.date} — ${escHtml(l.label)}</div>${l.suite ? `<div class="log-suite">&#8618; ${escHtml(l.suite)}</div>` : ''}</div>`).join(''); }
+    }
+
+    // ---- Drag & drop (touch + mouse) ----
+    let dragId = null, dragCol = null, overEl = null;
+
+    function setupDrag(container) {
+      container.querySelectorAll('.task-item').forEach(item => {
+        const handle = item.querySelector('.drag-handle');
+        handle.addEventListener('touchstart', onTouchStart, { passive: false });
+        handle.addEventListener('mousedown', onMouseDown);
+      });
+    }
+
+    function getItemEl(id) { return document.querySelector(`.task-item[data-id="${id}"]`); }
+
+    function onMouseDown(e) {
+      const item = e.currentTarget.closest('.task-item');
+      dragId = parseInt(item.dataset.id);
+      dragCol = item.dataset.col;
+      item.classList.add('dragging');
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+    }
+
+    function onMouseMove(e) {
+      if (!dragId) return;
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      const targetItem = el ? el.closest('.task-item') : null;
+      clearDragOver();
+      if (targetItem && parseInt(targetItem.dataset.id) !== dragId && targetItem.dataset.col === dragCol) {
+        overEl = targetItem;
+        targetItem.classList.add('drag-over');
       }
     }
 
-    function escHtml(s) {
-      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    function onMouseUp() {
+      finishDrag();
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
     }
+
+    function onTouchStart(e) {
+      e.preventDefault();
+      const item = e.currentTarget.closest('.task-item');
+      dragId = parseInt(item.dataset.id);
+      dragCol = item.dataset.col;
+      item.classList.add('dragging');
+      document.addEventListener('touchmove', onTouchMove, { passive: false });
+      document.addEventListener('touchend', onTouchEnd);
+    }
+
+    function onTouchMove(e) {
+      e.preventDefault();
+      if (!dragId) return;
+      const touch = e.touches[0];
+      const el = document.elementFromPoint(touch.clientX, touch.clientY);
+      const targetItem = el ? el.closest('.task-item') : null;
+      clearDragOver();
+      if (targetItem && parseInt(targetItem.dataset.id) !== dragId && targetItem.dataset.col === dragCol) {
+        overEl = targetItem;
+        targetItem.classList.add('drag-over');
+      }
+    }
+
+    function onTouchEnd() {
+      finishDrag();
+      document.removeEventListener('touchmove', onTouchMove);
+      document.removeEventListener('touchend', onTouchEnd);
+    }
+
+    function clearDragOver() {
+      document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+    }
+
+    function finishDrag() {
+      if (!dragId) return;
+      const dragEl = getItemEl(dragId);
+      if (dragEl) dragEl.classList.remove('dragging');
+      if (overEl) {
+        const overId = parseInt(overEl.dataset.id);
+        const dragIdx = tasks.findIndex(t => t.id === dragId);
+        const overIdx = tasks.findIndex(t => t.id === overId);
+        if (dragIdx !== -1 && overIdx !== -1) {
+          const [moved] = tasks.splice(dragIdx, 1);
+          tasks.splice(overIdx, 0, moved);
+          save(); render();
+        }
+      }
+      clearDragOver();
+      dragId = null; dragCol = null; overEl = null;
+    }
+    // ---- end drag ----
 
     function addTask() {
       const input = document.getElementById('new-task');
@@ -466,19 +271,12 @@
       if (!label) return;
       const col = document.getElementById('new-type').value === 'ext' ? 'ext' : 'moi';
       tasks.push({ id: nextId++, label, col });
-      input.value = '';
-      save(); render();
-      input.focus();
+      input.value = ''; save(); render(); input.focus();
     }
 
-    document.getElementById('new-task').addEventListener('keydown', e => {
-      if (e.key === 'Enter') addTask();
-    });
+    document.getElementById('new-task').addEventListener('keydown', e => { if (e.key === 'Enter') addTask(); });
 
-    function removeTask(id) {
-      tasks = tasks.filter(t => t.id !== id);
-      save(); render();
-    }
+    function removeTask(id) { tasks = tasks.filter(t => t.id !== id); save(); render(); }
 
     function startOK(id) {
       pendingTask = tasks.find(t => t.id === id);
@@ -489,10 +287,7 @@
       setTimeout(() => document.getElementById('suite-input').focus(), 300);
     }
 
-    function closeModal() {
-      document.getElementById('modal-overlay').classList.remove('visible');
-      pendingTask = null;
-    }
+    function closeModal() { document.getElementById('modal-overlay').classList.remove('visible'); pendingTask = null; }
 
     function confirmOK() {
       if (!pendingTask) return;
@@ -501,16 +296,11 @@
       const date = new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' });
       log.push({ date, label: pendingTask.label, suite });
       tasks = tasks.filter(t => t.id !== pendingTask.id);
-      if (suite && suiteType !== 'none') {
-        tasks.push({ id: nextId++, label: suite, col: suiteType === 'ext' ? 'ext' : 'moi' });
-      }
-      closeModal();
-      save(); render();
+      if (suite && suiteType !== 'none') tasks.push({ id: nextId++, label: suite, col: suiteType === 'ext' ? 'ext' : 'moi' });
+      closeModal(); save(); render();
     }
 
-    document.getElementById('modal-overlay').addEventListener('click', e => {
-      if (e.target === document.getElementById('modal-overlay')) closeModal();
-    });
+    document.getElementById('modal-overlay').addEventListener('click', e => { if (e.target === document.getElementById('modal-overlay')) closeModal(); });
 
     function toggleJournal() {
       journalOpen = !journalOpen;
@@ -518,10 +308,7 @@
       document.getElementById('journal-list').classList.toggle('open', journalOpen);
     }
 
-    // Service worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').catch(() => {});
-    }
+    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(() => {}); }
 
     loadData();
   </script>
