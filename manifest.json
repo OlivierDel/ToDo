@@ -1,0 +1,18 @@
+{
+  "name": "Todo",
+  "short_name": "Todo",
+  "description": "Todo simple — Moi / Attente externe",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f7f4",
+  "theme_color": "#ffffff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
